@@ -9,7 +9,6 @@ const TabContent1 = () => {
     return (
         <Typography>
             <StudentData />
-
         </Typography>
     );
 };

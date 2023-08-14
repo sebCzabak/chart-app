@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { createTheme, ThemeProvider, AppBar, Toolbar, Typography, Grid, Card, CardContent, IconButton } from '@mui/material';
 import ThreeDChart from './components/ThreeDChart';
 import MyTabs from './components/MuiComponents/Tabs';
@@ -20,7 +20,10 @@ const customTheme = createTheme({
 });
 
 const App = () => {
-  const [selectedTab, setSelectedTab] = React.useState(0);
+  const [selectedTab, setSelectedTab] = useState(0);
+  const tabsComponentRef = useRef(null);
+  const chartComponentRef = useRef(null);
+
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
@@ -36,20 +39,22 @@ const App = () => {
               Share {/* Ikona "udostępnij jeszcze pusta " */}
             </IconButton>
             <IconButton color="inherit">
-              <Print /> {/* Ikona "Drukuj jeszcze pusta " */}
+              <Print
+                chartComponentRef={chartComponentRef} tabsContentRef={tabsComponentRef}
+              />
             </IconButton>
           </Toolbar>
         </AppBar>
 
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} className="left-column">
-            <div className="chart-container">
+            <div className="chart-container" ref={chartComponentRef}>
               <ThreeDChart className="chart" />
             </div>
           </Grid>
           <Grid item xs={12} md={6} className="right-column">
             <MyTabs selectedTab={selectedTab} handleTabChange={handleTabChange} />
-            <div className="tabs-content">
+            <div className="tabs-content" ref={tabsComponentRef}>
               {selectedTab === 0 && <TabContent1 />}
               {selectedTab === 1 && <TabContent2 />}
               {selectedTab === 2 && <TabContent3 />}

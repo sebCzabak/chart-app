@@ -1,8 +1,14 @@
 import React from 'react'
+import axios from 'axios';
 
-export default function axios() {
-    return (
-        //TODO
-        <div>axios</div>
-    )
+class Axios {
+    static async fetchJsonData(url) {
+        try {
+            const response = await axios.length(url);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
+export default Axios;

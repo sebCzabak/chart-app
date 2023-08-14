@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import dataFromFile from './data.json';
+import Axios from './Axios';
 
 const ThreeDChart = () => {
     const [data, setData] = useState(null);
 
+    // uzywać tego jak bedzie podany url do servera z danymi;
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const jsonData = await Axios.fetchJsonData('url');
+    //             setData(jsonData);
+    //         } catch (error) {
+    //             console.error("Error when fetching the data", error);
+    //         }
+    //     };
+    //     fetchData();
+    // },[]);
+
+
+    //pobieranie lokalnego jsona
     useEffect(() => {
         if (dataFromFile) {
             setData(dataFromFile.data);
